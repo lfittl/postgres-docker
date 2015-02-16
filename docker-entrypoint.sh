@@ -72,6 +72,8 @@ if [ "$1" = 'initdb' ]; then
 			[ -f "$f" ] && . "$f"
 		done
 	fi
+
+	exit 0
 fi
 
 if [ "$1" = 'psql' ]; then
