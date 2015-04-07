@@ -29,6 +29,7 @@ if [ "$1" = 'initdb' ]; then
 	gosu postgres initdb
 
 	sed -ri "s/^#(listen_addresses\s*=\s*)\S+/\1'*'/" "$PGDATA"/postgresql.conf
+	sed -ri "s/^#(shared_preload_libraries\s*=\s*)\S+/\1'pg_stat_statements'/" "$PGDATA"/postgresql.conf
 
 	# check password first so we can ouptut the warning before postgres
 	# messes it up
@@ -72,6 +73,8 @@ if [ "$1" = 'initdb' ]; then
 			[ -f "$f" ] && . "$f"
 		done
 	fi
+
+	exit 0
 fi
 
 if [ "$1" = 'psql' ]; then
